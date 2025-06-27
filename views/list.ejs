@@ -1,0 +1,53 @@
+<%- include('partials/header') %>
+<div class="container">
+  <h1>My Todo List</h1>
+
+  <% if (error) { %>
+      <p class="alert" id="alert-box"><%= error %></p>
+  <% } %>
+  <% if (message) { %>
+      <p class="alert success" id="alert-box"><%= message %></p>
+  <% } %>
+
+  <p id="validation-message" class="alert" style="display: none;">Task cannot be empty!</p>
+
+  <form action="/add" method="POST" id="todo-form">
+    <input type="hidden" name="id" id="todo-id">
+    <input type="hidden" name="_method" value="POST" id="method-override">
+    <input type="text" name="task" placeholder="Enter a task" id="task-input">
+    <select name="priority" id="priority-input">
+      <option value="Low">Low</option>
+      <option value="High">High</option>
+      <option value="Urgent">Urgent</option>
+    </select>
+    <button type="submit" class="add-btn" id="submit-btn">Add</button>
+  </form>
+
+  <div class="filter-box">
+    <label for="priorityFilter">Filter by Priority:</label>
+    <select id="priorityFilter">
+      <option value="All">All</option>
+      <option value="Low">Low</option>
+      <option value="High">High</option>
+      <option value="Urgent">Urgent</option>
+    </select>
+  </div>
+
+  <ul id="todo-list">
+    <% todos.forEach(todo => { %>
+      <li data-priority="<%= todo.priority %>">
+        <div class="inline-form">
+          <span><%= todo.title %> (<%= todo.priority %>)</span>
+          <div class="todo-actions">
+            <button type="button" class="edit-btn" data-id="<%= todo._id %>" data-task="<%= todo.title %>" data-priority="<%= todo.priority %>"><i class="fas fa-pencil-alt"></i></button>
+
+            <form action="/delete/<%= todo._id %>?_method=DELETE" method="POST" class="delete-form">
+              <button type="submit" class="delete-btn"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </div>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+<%- include('partials/footer') %>
