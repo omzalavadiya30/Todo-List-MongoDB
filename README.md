@@ -6,7 +6,7 @@ A dynamic and responsive Todo List web application built using **Node.js**, **Ex
 
 ## 🔗 Live Demo
 
-👉 [Click here to open the live app](https://todo-list-mongodb-q9js.onrender.com)
+👉 [Click here to open the live app](https://todo-list-mongodb-q7fb.onrender.com/)
 
 ---
 
